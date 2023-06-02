@@ -1,5 +1,9 @@
+html{
+    font-family: sans-serif;
+}
+
 body{
-    background-color: rgb(140, 213, 213);
+    background-color: #292626;
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -10,7 +14,7 @@ body{
 .calcContainer{
     display: flex;
     background-color: black;
-    height: 460px;
+    height: 580px;
     width: 400px;
     margin-top: 40px;
     flex-direction: column;
@@ -18,16 +22,24 @@ body{
 }
 
 .display{
-    background-color: rgb(146, 146, 213);
+    background-color:#6e6767;
     height: 90px;
     margin: 20px;
     border-radius: 10px;
 }
+#displaynumber{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding: 15px 20px 20px 20px;
+    font-weight: bold;
+    font-size:larger
+}
 
 .padContainer{
     display: flex;
-    background-color: white;
-    height: 300px;
+    background-color: grey;
+    height: 420px;
     margin: 0px 20px 0px 20px;
     padding: 5px;
     border-radius: 10px;
@@ -38,10 +50,16 @@ body{
 
 .pad{
     
-    background-color: aqua;
+    background-color:#d2cfcf;
     height: 60px;
     width: 100px;
     flex-wrap: wrap;
-    border: 2px solid black;
     border-radius: 10px;
+}
+
+.digit{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size:larger  
 }
