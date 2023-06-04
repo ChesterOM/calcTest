@@ -1,6 +1,7 @@
-let userNum;
+let userNum = null;
 let userOperator;
-let total;
+let total = 0;
+let accumulatedValue = '0';
 
 function toNumber(){
    
@@ -10,7 +11,7 @@ function toNumber(){
 
 
 function add(){
-    total = parseInt(total) + userNum;
+    total = total + userNum;
     return total;
 };
 
@@ -30,64 +31,66 @@ function divide(){
 };
 
 function operate(userOperator){
-    userNum = total;
     
     switch(userOperator){
         case '+':
-             add();
+            total = add();
             break;
         case '-':
-             sub();
+            total = sub();
             break;
         case '*':
-             multi();
+            total = multi();
             break;
         case '/':
-             divide();
+            total = divide();
             break;
-        case '=':
-          displayTotal()  
-            break;
+            default:
+                console.log('Unkown operator' + userOperator);
     }
-  
+    userNum = 0
     accumulatedValue = total.toString();
+    display()
 }
- 
-let accumulatedValue = 0;
 
+
+ 
 function display(){
    let changeDisplay = document.getElementById('displaynumber');
     changeDisplay.innerText = '' + accumulatedValue;
 }
 
-function displayTotal(){
-    accumulatedValue = total.toString(); 
-}
 
 function userClickNumber(event) {
-    const buttonValue = parseInt(event.target.textContent);
-    accumulatedValue += buttonValue;
+    const buttonValue = event.target.textContent;
+    accumulatedValue = accumulatedValue === '0' ? buttonValue : accumulatedValue + buttonValue;
     console.log(accumulatedValue);
     display()
     toNumber()
-    console.log(typeof userNum)
-    return accumulatedValue;
 }
 
 function userClickOperator(event) {
     const buttonValue = event.target.textContent;
-    userOperator = buttonValue
-    display()
-    operate(userOperator)
-    // convert total to string then post in display and concat with next input
+    toNumber()
+    if (total == 0){
+        total = userNum
+    } else if (userOperator){
+        operate(userOperator);
+        display()
+    }
+    userOperator = buttonValue;
+    accumulatedValue = '0'
     console.log(userOperator)
-    return userOperator
 }
 
-// select number then when operate is selected save the selected number to a userinput
-
-// button click on '=' deletes current displaynumber and replaces with total
-
+function userClickEquals() {
+    toNumber();
+    if (userOperator && userNum !==null) {
+        operate(userOperator);
+        userOperator = null;
+        display();
+    }
+}
 
 function clickNum(){
     const testbtn = document.getElementsByClassName('num');
@@ -104,22 +107,16 @@ function clickOperator(){
     testbtn[i].addEventListener('click', userClickOperator);
 }
 }
+
+function clickEquals(){
+    const testbtn = document.getElementsByClassName('eq');
+
+    for (let i = 0; i < testbtn.length; i++){
+    testbtn[i].addEventListener('click', userClickEquals);
+}
+}
+
 clickOperator();
 clickNum();
-
-
-
-
-
-// function testInput(){
-//      userNum1 = prompt();
-//      userOperator = prompt();
-//      userNum2 = prompt();
-    
-//     toNumber();
-//     operate(userOperator);
-// };
-
-// const testbtn = document.getElementById('btn');
-// testbtn.addEventListener('click', testInput);
+clickEquals();
 
