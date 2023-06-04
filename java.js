@@ -4,9 +4,7 @@ let total = 0;
 let accumulatedValue = '0';
 
 function toNumber(){
-   
     userNum = Number(accumulatedValue);
-    console.log(typeof userNum)
 }
 
 
@@ -64,7 +62,6 @@ function display(){
 function userClickNumber(event) {
     const buttonValue = event.target.textContent;
     accumulatedValue = accumulatedValue === '0' ? buttonValue : accumulatedValue + buttonValue;
-    console.log(accumulatedValue);
     display()
     toNumber()
 }
@@ -80,7 +77,6 @@ function userClickOperator(event) {
     }
     userOperator = buttonValue;
     accumulatedValue = '0'
-    console.log(userOperator)
 }
 
 function userClickEquals() {
@@ -90,6 +86,15 @@ function userClickEquals() {
         userOperator = null;
         display();
     }
+}
+
+function userClickClear(){
+    let changeDisplay = document.getElementById('displaynumber');
+    userNum = null;
+     userOperator;
+     total = 0;
+     accumulatedValue = '0';
+     changeDisplay.innerText = ''
 }
 
 function clickNum(){
@@ -116,7 +121,15 @@ function clickEquals(){
 }
 }
 
+function clickClear(){
+    const testbtn = document.getElementsByClassName('ac');
+
+    for (let i = 0; i < testbtn.length; i++){
+    testbtn[i].addEventListener('click', userClickClear);
+}
+}
+
 clickOperator();
 clickNum();
 clickEquals();
-
+clickClear()
